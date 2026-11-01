@@ -41,15 +41,15 @@ async def test_setup_calendar_and_change(hass, aioclient_mock):
     assert hass.states.get(entity_id) is not None
     events = await get_events(hass, entity_id, "2026-11-02 00:00:00", "2026-11-08 23:59:00")
     assert events == [
-        ("2026-11-02T06:30:00+01:00", "2026-11-02T12:40:00+01:00", "Indifferenziato"),
-        ("2026-11-02T14:00:00+01:00", "2026-11-02T19:55:00+01:00", "Organico"),
-        ("2026-11-03T06:30:00+01:00", "2026-11-03T12:40:00+01:00", "Carta"),
-        ("2026-11-04T06:30:00+01:00", "2026-11-04T12:40:00+01:00", "Plastica e metalli"),
-        ("2026-11-04T14:00:00+01:00", "2026-11-04T19:55:00+01:00", "Organico"),
-        ("2026-11-05T06:30:00+01:00", "2026-11-05T12:40:00+01:00", "Indifferenziato"),
-        ("2026-11-06T06:30:00+01:00", "2026-11-06T12:40:00+01:00", "Carta"),
-        ("2026-11-06T14:00:00+01:00", "2026-11-06T19:55:00+01:00", "Organico"),
-        ("2026-11-07T06:30:00+01:00", "2026-11-07T12:40:00+01:00", "Plastica e metalli"),
+        ("2026-11-02T06:30:00+01:00", "2026-11-02T08:30:00+01:00", "Indifferenziato"),
+        ("2026-11-02T14:00:00+01:00", "2026-11-02T16:00:00+01:00", "Organico"),
+        ("2026-11-03T06:30:00+01:00", "2026-11-03T08:30:00+01:00", "Carta"),
+        ("2026-11-04T06:30:00+01:00", "2026-11-04T08:30:00+01:00", "Plastica e metalli"),
+        ("2026-11-04T14:00:00+01:00", "2026-11-04T16:00:00+01:00", "Organico"),
+        ("2026-11-05T06:30:00+01:00", "2026-11-05T08:30:00+01:00", "Indifferenziato"),
+        ("2026-11-06T06:30:00+01:00", "2026-11-06T08:30:00+01:00", "Carta"),
+        ("2026-11-06T14:00:00+01:00", "2026-11-06T16:00:00+01:00", "Organico"),
+        ("2026-11-07T06:30:00+01:00", "2026-11-07T08:30:00+01:00", "Plastica e metalli"),
     ]
 
     # A month later AMA returns a different schedule: calendar follows, user is notified.
@@ -60,9 +60,9 @@ async def test_setup_calendar_and_change(hass, aioclient_mock):
     notes = hass.data["persistent_notification"]
     assert any("cambiato" in n["title"] for n in notes.values())
 
-    # Street bins emptied 22:00–04:00: the event runs past midnight and is found from either day.
-    after_midnight = await get_events(hass, entity_id, "2026-11-03 01:00:00", "2026-11-03 02:00:00")
-    assert ("2026-11-02T22:00:00+01:00", "2026-11-03T04:00:00+01:00", "Indifferenziato") in after_midnight
+    # Street bins emptied from 22:00: the 2-hour event ends at midnight and is found from the evening.
+    evening = await get_events(hass, entity_id, "2026-11-02 23:00:00", "2026-11-02 23:30:00")
+    assert ("2026-11-02T22:00:00+01:00", "2026-11-03T00:00:00+01:00", "Indifferenziato") in evening
 
 
 async def get_events(hass, entity_id, start, end):

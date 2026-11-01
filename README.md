@@ -18,7 +18,7 @@ Scrivi la tua via e il civico: Home Assistant crea un calendario con tutti i gio
 | | |
 |---|---|
 | 📅 **Calendario automatico** | Un evento per ogni raccolta: *Carta*, *Organico*, *Plastica e metalli*, *Indifferenziato*, *Vetro* |
-| ⏰ **All'orario giusto** | Porta a porta: l'evento inizia all'ora entro cui esporre (es. 20:00) e dura fino al ritiro. Cassonetti in strada: dura per l'orario di svuotamento (es. 22:00–04:00) |
+| ⏰ **All'orario giusto** | Porta a porta: l'evento inizia all'ora entro cui esporre (es. 20:00–22:00). Cassonetti in strada: all'inizio dello svuotamento. Ogni evento dura 2 ore, l'orario completo del ritiro è nella descrizione |
 | 🔄 **Sempre aggiornato** | Ogni 30 giorni (e a ogni riavvio) ricontrolla il sito AMA |
 | 🔔 **Ti avvisa dei cambi** | Se AMA modifica giorni o orari, il calendario si aggiorna e ricevi una notifica |
 | 🔒 **Niente account** | Nessuna registrazione, nessuna chiave: usa gli stessi dati pubblici di [amaroma.it](https://www.amaroma.it/it/servizi/calendario-svuotamento-contenitori) |
@@ -40,7 +40,7 @@ Puoi cambiargli nome e ID da **Impostazioni → Entità → ⚙️**.
 **Cosa significa lo stato `on` / `off`?**
 Come ogni calendario di Home Assistant, lo stato è:
 
-- **`on`** una raccolta è in corso: dall'ora entro cui esporre fino alla fine del ritiro;
+- **`on`** una raccolta è in corso: per 2 ore dall'ora entro cui esporre;
 - **`off`** in questo momento non c'è nessuna raccolta.
 
 Gli attributi dell'entità mostrano la raccolta in corso o la **prossima**: `message` (il tipo di rifiuto), `description` (gli orari), `start_time`, `end_time`.

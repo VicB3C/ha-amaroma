@@ -24,6 +24,7 @@ async def async_setup_entry(
 
 # AMA times are Rome local time, whatever time zone Home Assistant is set to.
 ROME = dt_util.get_time_zone("Europe/Rome")
+EVENT_DURATION = timedelta(hours=2)
 
 
 def _at(day: date, hhmm: str) -> datetime:
@@ -31,12 +32,10 @@ def _at(day: date, hhmm: str) -> datetime:
 
 
 def _event(c: Collection, day: date) -> CalendarEvent:
-    # Door-to-door: from the "expose by" deadline shown on amaroma.it until pickup ends.
-    # Street bins: the emptying window.
+    # Starts at the "expose by" deadline shown on amaroma.it (street bins: when emptying starts);
+    # the full pickup window is in the description.
     start = _at(day, c.expose_by or c.start)
-    end = _at(day, c.end) if c.end else start + timedelta(hours=1)
-    if end <= start:  # pickup runs past midnight, e.g. 20:30–02:30
-        end += timedelta(days=1)
+    end = start + EVENT_DURATION
     if c.expose_by:
         description = f"Esporre entro le {c.expose_by} (raccolta porta a porta, ritiro fino alle {c.end})"
     else:
