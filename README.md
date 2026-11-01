@@ -45,6 +45,14 @@ Come ogni calendario di Home Assistant, lo stato è:
 
 Gli attributi dell'entità mostrano la raccolta in corso o la **prossima**: `message` (il tipo di rifiuto), `description` (gli orari), `start_time`, `end_time`.
 
+**Bidoni colorati in dashboard.** Ogni evento ha nella descrizione una riga `color:` con il colore del bidone, letta da card come [HA Separate Garbage Collection](https://github.com/RedFoxy/HA-Separate-Garbage-Collection):
+
+```yaml
+type: custom:ha-separate-garbage-collection-card
+calendar: calendar.raccolta_rifiuti_via_nomentana_44
+language: it
+```
+
 ## 🔔 Esempio: avviso la sera prima
 
 Ogni sera alle 20:00 ti dice cosa esporre il giorno dopo (e niente, se non c'è raccolta):

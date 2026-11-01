@@ -53,6 +53,12 @@ async def test_setup_calendar_and_change(hass, aioclient_mock):
         ("2026-11-06T14:00:00+01:00", "2026-11-06T16:00:00+01:00", "Organico"),
         ("2026-11-07T06:30:00+01:00", "2026-11-07T08:30:00+01:00", "Plastica e metalli"),
     ]
+    resp = await hass.services.async_call(
+        "calendar", "get_events",
+        {"entity_id": entity_id, "start_date_time": "2026-11-03 00:00:00", "end_date_time": "2026-11-03 23:59:00"},
+        blocking=True, return_response=True,
+    )
+    assert resp[entity_id]["events"][0]["description"] == "Esporre entro le 06:30 (raccolta porta a porta)\ncolor: #2196F3"
 
     # The README's "forward to phone" automation, exactly as written there.
     readme = (HERE.parent / "README.md").read_text()

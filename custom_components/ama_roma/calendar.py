@@ -25,6 +25,13 @@ async def async_setup_entry(
 # AMA times are Rome local time, whatever time zone Home Assistant is set to.
 ROME = dt_util.get_time_zone("Europe/Rome")
 EVENT_DURATION = timedelta(hours=2)
+# AMA bin colours, as a "color:" line that dashboard cards (e.g. ha-separate-garbage-collection-card) read.
+COLORS = {
+    "Carta": "#2196F3",
+    "Organico": "#795548",
+    "Plastica e metalli": "#FFC107",
+    "Indifferenziato": "#9E9E9E",
+}
 
 
 def _at(day: date, hhmm: str) -> datetime:
@@ -39,6 +46,8 @@ def _event(c: Collection, day: date) -> CalendarEvent:
         description = f"Esporre entro le {c.expose_by} (raccolta porta a porta)"
     else:
         description = f"Svuotamento cassonetti {c.start}–{c.end}"
+    if color := COLORS.get(c.fraction):
+        description += f"\ncolor: {color}"
     return CalendarEvent(start=start, end=end, summary=c.fraction, description=description)
 
 
