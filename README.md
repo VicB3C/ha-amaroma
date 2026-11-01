@@ -18,7 +18,7 @@ Scrivi la tua via e il civico: Home Assistant crea un calendario con tutti i gio
 | | |
 |---|---|
 | 📅 **Calendario automatico** | Un evento per ogni raccolta: *Carta*, *Organico*, *Plastica e metalli*, *Indifferenziato*, *Vetro* |
-| ⏰ **Orari giusti** | Porta a porta: *"Esporre entro le 20:00"*. Cassonetti in strada: *"Svuotamento 22:00–04:00"* |
+| ⏰ **All'orario giusto** | Porta a porta: l'evento inizia all'ora entro cui esporre (es. 20:00) e dura fino al ritiro. Cassonetti in strada: dura per l'orario di svuotamento (es. 22:00–04:00) |
 | 🔄 **Sempre aggiornato** | Ogni 30 giorni (e a ogni riavvio) ricontrolla il sito AMA |
 | 🔔 **Ti avvisa dei cambi** | Se AMA modifica giorni o orari, il calendario si aggiorna e ricevi una notifica |
 | 🔒 **Niente account** | Nessuna registrazione, nessuna chiave: usa gli stessi dati pubblici di [amaroma.it](https://www.amaroma.it/it/servizi/calendario-svuotamento-contenitori) |
@@ -40,26 +40,40 @@ Puoi cambiargli nome e ID da **Impostazioni → Entità → ⚙️**.
 **Cosa significa lo stato `on` / `off`?**
 Come ogni calendario di Home Assistant, lo stato è:
 
-- **`on`** oggi c'è una raccolta (l'evento dura tutta la giornata);
-- **`off`** oggi non c'è nessuna raccolta.
+- **`on`** una raccolta è in corso: dall'ora entro cui esporre fino alla fine del ritiro;
+- **`off`** in questo momento non c'è nessuna raccolta.
 
-Gli attributi dell'entità mostrano la **prossima raccolta**: `message` (il tipo di rifiuto), `description` (l'orario), `start_time`.
+Gli attributi dell'entità mostrano la raccolta in corso o la **prossima**: `message` (il tipo di rifiuto), `description` (gli orari), `start_time`, `end_time`.
 
 ## 🔔 Esempio: avviso la sera prima
+
+Ogni sera alle 20:00 ti dice cosa esporre il giorno dopo (e niente, se non c'è raccolta):
 
 ```yaml
 alias: Promemoria spazzatura
 triggers:
-  - trigger: calendar
-    event: start
-    entity_id: calendar.raccolta_rifiuti_via_nomentana_44
-    offset: "-04:00:00"   # alle 20:00 del giorno prima
+  - trigger: time
+    at: "20:00:00"
 actions:
+  - action: calendar.get_events
+    target:
+      entity_id: calendar.raccolta_rifiuti_via_nomentana_44
+    data:
+      start_date_time: "{{ today_at('00:00') + timedelta(days=1) }}"
+      end_date_time: "{{ today_at('00:00') + timedelta(days=2) }}"
+    response_variable: domani
+  - variables:
+      eventi: "{{ domani['calendar.raccolta_rifiuti_via_nomentana_44'].events }}"
+  - condition: template
+    value_template: "{{ eventi | count > 0 }}"
   - action: notify.notify
     data:
       title: "🗑️ Domani si raccoglie"
-      message: "{{ trigger.calendar_event.summary }}: {{ trigger.calendar_event.description }}"
+      message: >-
+        {% for e in eventi %}{{ e.summary }} entro le {{ as_datetime(e.start).strftime('%H:%M') }}{{ '\n' if not loop.last }}{% endfor %}
 ```
+
+Preferisci un avviso poco prima della scadenza? Usa il trigger `calendar` con un `offset`, per esempio `"-01:00:00"` per un'ora prima.
 
 ## ❓ Domande frequenti
 

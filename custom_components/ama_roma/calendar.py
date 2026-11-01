@@ -1,8 +1,7 @@
-"""Calendar with one all-day event per collection."""
+"""Calendar with one timed event per collection."""
 from __future__ import annotations
 
-from collections.abc import Iterator
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, time, timedelta
 
 from homeassistant.components.calendar import CalendarEntity, CalendarEvent
 from homeassistant.config_entries import ConfigEntry
@@ -23,12 +22,26 @@ async def async_setup_entry(
     async_add_entities([AmaCalendar(entry.runtime_data, entry)])
 
 
+# AMA times are Rome local time, whatever time zone Home Assistant is set to.
+ROME = dt_util.get_time_zone("Europe/Rome")
+
+
+def _at(day: date, hhmm: str) -> datetime:
+    return datetime.combine(day, time.fromisoformat(hhmm), tzinfo=ROME)
+
+
 def _event(c: Collection, day: date) -> CalendarEvent:
+    # Door-to-door: from the "expose by" deadline shown on amaroma.it until pickup ends.
+    # Street bins: the emptying window.
+    start = _at(day, c.expose_by or c.start)
+    end = _at(day, c.end) if c.end else start + timedelta(hours=1)
+    if end <= start:  # pickup runs past midnight, e.g. 20:30–02:30
+        end += timedelta(days=1)
     if c.expose_by:
-        description = f"Esporre entro le {c.expose_by} (raccolta porta a porta)"
+        description = f"Esporre entro le {c.expose_by} (raccolta porta a porta, ritiro fino alle {c.end})"
     else:
         description = f"Svuotamento cassonetti {c.start}–{c.end}"
-    return CalendarEvent(start=day, end=day + timedelta(days=1), summary=c.fraction, description=description)
+    return CalendarEvent(start=start, end=end, summary=c.fraction, description=description)
 
 
 class AmaCalendar(CoordinatorEntity[AmaCoordinator], CalendarEntity):
@@ -46,20 +59,23 @@ class AmaCalendar(CoordinatorEntity[AmaCoordinator], CalendarEntity):
             entry_type=DeviceEntryType.SERVICE,
         )
 
-    def _events(self, first: date, last: date) -> Iterator[CalendarEvent]:
-        day = first
-        while day <= last:
-            for c in self.coordinator.data:
-                if c.weekday == day.weekday():
-                    yield _event(c, day)
+    def _events(self, start: datetime, end: datetime) -> list[CalendarEvent]:
+        """Events overlapping [start, end), sorted by start."""
+        events = []
+        # Start a day early: yesterday's late pickup may still be running.
+        day = start.astimezone(ROME).date() - timedelta(days=1)
+        while day <= end.astimezone(ROME).date():
+            events += [_event(c, day) for c in self.coordinator.data if c.weekday == day.weekday()]
             day += timedelta(days=1)
+        return sorted((e for e in events if e.end > start and e.start < end), key=lambda e: e.start)
 
     @property
     def event(self) -> CalendarEvent | None:
-        today = dt_util.now().date()
-        return next(self._events(today, today + timedelta(days=7)), None)
+        """The collection in progress, or the next one."""
+        now = dt_util.now()
+        return next(iter(self._events(now, now + timedelta(days=8))), None)
 
     async def async_get_events(
         self, hass: HomeAssistant, start_date: datetime, end_date: datetime
     ) -> list[CalendarEvent]:
-        return list(self._events(start_date.date(), end_date.date()))
+        return self._events(start_date, end_date)
