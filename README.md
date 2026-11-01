@@ -6,7 +6,7 @@
 Scrivi la tua via e il civico: Home Assistant crea un calendario con tutti i giorni di raccolta AMA del tuo indirizzo a Roma, e lo tiene aggiornato da solo.
 
 <p align="center">
-  <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=woody4165&repository=ha-amaroma&category=integration">
+  <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=VicB3C&repository=ha-amaroma&category=integration">
     <img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Apri in HACS">
   </a>
 </p>
@@ -25,7 +25,7 @@ Scrivi la tua via e il civico: Home Assistant crea un calendario con tutti i gio
 
 ## 📦 Installazione
 
-1. Clicca il pulsante **Apri in HACS** qui sopra, oppure in HACS apri **⋮ → Repository personalizzati**, incolla `https://github.com/woody4165/ha-amaroma` e scegli **Integrazione**.
+1. Clicca il pulsante **Apri in HACS** qui sopra, oppure in HACS apri **⋮ → Repository personalizzati**, incolla `https://github.com/VicB3C/ha-amaroma` e scegli **Integrazione**.
 2. Scarica **AMA Roma Raccolta Rifiuti** e **riavvia Home Assistant**.
 3. Vai in **Impostazioni → Dispositivi e servizi → Aggiungi integrazione** e cerca **AMA Roma**.
 4. Scrivi la **via** (es. `via nomentana`) e il **numero civico**. Fatto!
@@ -111,4 +111,4 @@ Sostituisci `notify.notify` con il servizio del tuo telefono, per esempio `notif
 
 ## ⚠️ Nota
 
-Integrazione non ufficiale, non collegata ad AMA S.p.A. Usa un servizio web non documentato di amaroma.it: se AMA lo cambia, l'integrazione potrebbe smettere di funzionare finché non viene aggiornata. Problemi? [Apri una segnalazione](https://github.com/woody4165/ha-amaroma/issues).
+Integrazione non ufficiale, non collegata ad AMA S.p.A. Usa un servizio web non documentato di amaroma.it: se AMA lo cambia, l'integrazione potrebbe smettere di funzionare finché non viene aggiornata. Problemi? [Apri una segnalazione](https://github.com/VicB3C/ha-amaroma/issues).
