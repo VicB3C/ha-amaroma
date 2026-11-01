@@ -32,12 +32,11 @@ def _at(day: date, hhmm: str) -> datetime:
 
 
 def _event(c: Collection, day: date) -> CalendarEvent:
-    # Starts at the "expose by" deadline shown on amaroma.it (street bins: when emptying starts);
-    # the full pickup window is in the description.
+    # Starts at the "expose by" deadline shown on amaroma.it (street bins: when emptying starts).
     start = _at(day, c.expose_by or c.start)
     end = start + EVENT_DURATION
     if c.expose_by:
-        description = f"Esporre entro le {c.expose_by} (raccolta porta a porta, ritiro fino alle {c.end})"
+        description = f"Esporre entro le {c.expose_by} (raccolta porta a porta)"
     else:
         description = f"Svuotamento cassonetti {c.start}–{c.end}"
     return CalendarEvent(start=start, end=end, summary=c.fraction, description=description)
