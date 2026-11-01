@@ -1,0 +1,17 @@
+# Quando viene caricata un'etichetta come v1.0.2, pubblica la release che HACS mostra come versione.
+name: Release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Controlla che l'etichetta corrisponda alla versione nel manifest
+        run: test "v$(jq -r .version custom_components/ama_roma/manifest.json)" = "$GITHUB_REF_NAME"
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
