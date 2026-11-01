@@ -1,0 +1,154 @@
+{
+    "result": [
+        {
+            "RESPONSE": [
+                {
+                    "STREET": "VIA NOMENTANA",
+                    "HOUSE_NUM": "44",
+                    "ESITO": "OK",
+                    "COD_MSG": "010",
+                    "MESSAGE": "Elaborazione terminata senza errori"
+                },
+                {
+                    "STREET": "VIA NOMENTANA",
+                    "HOUSE_NUM": "44",
+                    "ESITO": "OK",
+                    "COD_MSG": "010",
+                    "MESSAGE": "Elaborazione terminata senza errori"
+                }
+            ],
+            "PAP": [
+                {
+                    "MUNICIPIO": "MUNICIPIO 02",
+                    "TIPOLOGIA_RACCOLTA": "PAP01",
+                    "VIA": "VIA NOMENTANA",
+                    "CIVICO": "44",
+                    "DESCR_FRAZIONE": "RIFIUTO INDIFFERENZIATO",
+                    "GIORNO_RACCOLTA": "1",
+                    "GIORNO_ESPOSIZIONE": "1",
+                    "ORARIO_FINE_ESP": "06:30",
+                    "CALENDAR_ESP": "ENTRO LE ORE 06:30",
+                    "ORA_INIZIO": "060000",
+                    "ORA_FINE": "124000",
+                    "PRIMA_DATA_SERV": "20261102"
+                },
+                {
+                    "MUNICIPIO": "MUNICIPIO 02",
+                    "TIPOLOGIA_RACCOLTA": "PAP01",
+                    "VIA": "VIA NOMENTANA",
+                    "CIVICO": "44",
+                    "DESCR_FRAZIONE": "RIFIUTO INDIFFERENZIATO",
+                    "GIORNO_RACCOLTA": "4",
+                    "GIORNO_ESPOSIZIONE": "4",
+                    "ORARIO_FINE_ESP": "06:30",
+                    "CALENDAR_ESP": "ENTRO LE ORE 06:30",
+                    "ORA_INIZIO": "060000",
+                    "ORA_FINE": "124000",
+                    "PRIMA_DATA_SERV": "20261102"
+                },
+                {
+                    "MUNICIPIO": "MUNICIPIO 02",
+                    "TIPOLOGIA_RACCOLTA": "PAP01",
+                    "VIA": "VIA NOMENTANA",
+                    "CIVICO": "44",
+                    "DESCR_FRAZIONE": "RIFIUTO RD CARTA",
+                    "GIORNO_RACCOLTA": "2",
+                    "GIORNO_ESPOSIZIONE": "2",
+                    "ORARIO_FINE_ESP": "06:30",
+                    "CALENDAR_ESP": "ENTRO LE ORE 06:30",
+                    "ORA_INIZIO": "060000",
+                    "ORA_FINE": "124000",
+                    "PRIMA_DATA_SERV": "20261103"
+                },
+                {
+                    "MUNICIPIO": "MUNICIPIO 02",
+                    "TIPOLOGIA_RACCOLTA": "PAP01",
+                    "VIA": "VIA NOMENTANA",
+                    "CIVICO": "44",
+                    "DESCR_FRAZIONE": "RIFIUTO RD CARTA",
+                    "GIORNO_RACCOLTA": "5",
+                    "GIORNO_ESPOSIZIONE": "5",
+                    "ORARIO_FINE_ESP": "06:30",
+                    "CALENDAR_ESP": "ENTRO LE ORE 06:30",
+                    "ORA_INIZIO": "060000",
+                    "ORA_FINE": "124000",
+                    "PRIMA_DATA_SERV": "20261103"
+                },
+                {
+                    "MUNICIPIO": "MUNICIPIO 02",
+                    "TIPOLOGIA_RACCOLTA": "PAP01",
+                    "VIA": "VIA NOMENTANA",
+                    "CIVICO": "44",
+                    "DESCR_FRAZIONE": "RIFIUTO RD MULTIMATERIALE",
+                    "GIORNO_RACCOLTA": "3",
+                    "GIORNO_ESPOSIZIONE": "3",
+                    "ORARIO_FINE_ESP": "06:30",
+                    "CALENDAR_ESP": "ENTRO LE ORE 06:30",
+                    "ORA_INIZIO": "060000",
+                    "ORA_FINE": "124000",
+                    "PRIMA_DATA_SERV": "20261104"
+                },
+                {
+                    "MUNICIPIO": "MUNICIPIO 02",
+                    "TIPOLOGIA_RACCOLTA": "PAP01",
+                    "VIA": "VIA NOMENTANA",
+                    "CIVICO": "44",
+                    "DESCR_FRAZIONE": "RIFIUTO RD MULTIMATERIALE",
+                    "GIORNO_RACCOLTA": "6",
+                    "GIORNO_ESPOSIZIONE": "6",
+                    "ORARIO_FINE_ESP": "06:30",
+                    "CALENDAR_ESP": "ENTRO LE ORE 06:30",
+                    "ORA_INIZIO": "060000",
+                    "ORA_FINE": "124000",
+                    "PRIMA_DATA_SERV": "20261104"
+                },
+                {
+                    "MUNICIPIO": "MUNICIPIO 02",
+                    "TIPOLOGIA_RACCOLTA": "PAP01",
+                    "VIA": "VIA NOMENTANA",
+                    "CIVICO": "44",
+                    "DESCR_FRAZIONE": "RIFIUTO RD UMIDO",
+                    "GIORNO_RACCOLTA": "1",
+                    "GIORNO_ESPOSIZIONE": "1",
+                    "ORARIO_FINE_ESP": "14:00",
+                    "CALENDAR_ESP": "ENTRO LE ORE 14:00",
+                    "ORA_INIZIO": "131500",
+                    "ORA_FINE": "195500",
+                    "PRIMA_DATA_SERV": "20261102"
+                },
+                {
+                    "MUNICIPIO": "MUNICIPIO 02",
+                    "TIPOLOGIA_RACCOLTA": "PAP01",
+                    "VIA": "VIA NOMENTANA",
+                    "CIVICO": "44",
+                    "DESCR_FRAZIONE": "RIFIUTO RD UMIDO",
+                    "GIORNO_RACCOLTA": "3",
+                    "GIORNO_ESPOSIZIONE": "3",
+                    "ORARIO_FINE_ESP": "14:00",
+                    "CALENDAR_ESP": "ENTRO LE ORE 14:00",
+                    "ORA_INIZIO": "131500",
+                    "ORA_FINE": "195500",
+                    "PRIMA_DATA_SERV": "20261102"
+                },
+                {
+                    "MUNICIPIO": "MUNICIPIO 02",
+                    "TIPOLOGIA_RACCOLTA": "PAP01",
+                    "VIA": "VIA NOMENTANA",
+                    "CIVICO": "44",
+                    "DESCR_FRAZIONE": "RIFIUTO RD UMIDO",
+                    "GIORNO_RACCOLTA": "5",
+                    "GIORNO_ESPOSIZIONE": "5",
+                    "ORARIO_FINE_ESP": "14:00",
+                    "CALENDAR_ESP": "ENTRO LE ORE 14:00",
+                    "ORA_INIZIO": "131500",
+                    "ORA_FINE": "195500",
+                    "PRIMA_DATA_SERV": "20261102"
+                }
+            ],
+            "DUALE_PAP": [],
+            "PAP_DUALE_STRAD": [],
+            "RACC_STRAD": [],
+            "RACC_STRAD_NEW": []
+        }
+    ]
+}

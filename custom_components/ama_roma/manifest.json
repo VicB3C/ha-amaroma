@@ -1,0 +1,12 @@
+{
+  "domain": "ama_roma",
+  "name": "AMA Roma Raccolta Rifiuti",
+  "codeowners": ["@woody4165"],
+  "config_flow": true,
+  "documentation": "https://github.com/woody4165/ha-ama-roma",
+  "issue_tracker": "https://github.com/woody4165/ha-ama-roma/issues",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "1.0.0"
+}

@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Address",
+        "description": "Enter the street and house number, as on the AMA website.",
+        "data": {
+          "street": "Street",
+          "number": "House number"
+        }
+      }
+    },
+    "error": {
+      "street_not_found": "Street not found in AMA's street list.",
+      "no_schedule": "AMA has no collection schedule for this house number.",
+      "cannot_connect": "Cannot reach amaroma.it."
+    },
+    "abort": {
+      "already_configured": "This address is already configured."
+    }
+  }
+}

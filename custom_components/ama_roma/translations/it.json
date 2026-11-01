@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Indirizzo",
+        "description": "Inserisci la via e il numero civico, come sul sito AMA.",
+        "data": {
+          "street": "Via",
+          "number": "Numero civico"
+        }
+      }
+    },
+    "error": {
+      "street_not_found": "Via non trovata nello stradario AMA.",
+      "no_schedule": "AMA non ha un calendario di raccolta per questo civico.",
+      "cannot_connect": "Impossibile contattare amaroma.it."
+    },
+    "abort": {
+      "already_configured": "Questo indirizzo è già configurato."
+    }
+  }
+}
