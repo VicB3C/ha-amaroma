@@ -21,6 +21,7 @@ Scrivi la tua via e il civico: Home Assistant crea un calendario con tutti i gio
 | ⏰ **All'orario giusto** | Porta a porta: l'evento inizia all'ora entro cui esporre (es. 20:00–22:00). Cassonetti in strada: all'inizio dello svuotamento. Ogni evento dura 2 ore |
 | 🔄 **Sempre aggiornato** | Ogni 30 giorni (e a ogni riavvio) ricontrolla il sito AMA |
 | 🔔 **Ti avvisa dei cambi** | Se AMA modifica giorni o orari, il calendario si aggiorna e compare una notifica in Home Assistant. Per riceverla anche sul telefono serve [un'automazione](#-notifica-sul-telefono-quando-ama-cambia-giorni-o-orari) |
+| 🎨 **Colore del bidone** | Nelle note di ogni evento c'è anche il codice del colore del bidone (es. `color: #2196F3`), che alcune card per dashboard usano per [colorare i bidoni](#-bidoni-colorati-nella-dashboard) |
 | 🔒 **Niente account** | Nessuna registrazione, nessuna chiave: usa gli stessi dati pubblici di [amaroma.it](https://www.amaroma.it/it/servizi/calendario-svuotamento-contenitori) |
 
 ## 📦 Installazione
@@ -45,7 +46,23 @@ Come ogni calendario di Home Assistant, lo stato è:
 
 Gli attributi dell'entità mostrano la raccolta in corso o la **prossima**: `message` (il tipo di rifiuto), `description` (gli orari), `start_time`, `end_time`.
 
-**Bidoni colorati in dashboard.** Ogni evento ha nella descrizione una riga `color:` con il colore del bidone, letta da card come [HA Separate Garbage Collection](https://github.com/RedFoxy/HA-Separate-Garbage-Collection):
+### 🎨 Bidoni colorati nella dashboard
+
+Le note (descrizione) di ogni evento hanno due righe: gli orari e il **codice colore** del bidone. Per esempio:
+
+```text
+Esporre entro le 20:00 (raccolta porta a porta)
+color: #2196F3
+```
+
+| Rifiuto | Colore |
+|---|---|
+| Carta | blu `#2196F3` |
+| Organico | marrone `#795548` |
+| Plastica e metalli | giallo `#FFC107` |
+| Indifferenziato | grigio `#9E9E9E` |
+
+La riga `color:` non serve al calendario di Home Assistant, ma alcune card la leggono per colorare ogni bidone. Per esempio [HA Separate Garbage Collection](https://github.com/RedFoxy/HA-Separate-Garbage-Collection):
 
 ```yaml
 type: custom:ha-separate-garbage-collection-card
