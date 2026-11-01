@@ -4,9 +4,11 @@ import pathlib
 from datetime import timedelta
 
 import pytest
+import yaml
 from homeassistant import config_entries
+from homeassistant.setup import async_setup_component
 from homeassistant.util import dt as dt_util
-from pytest_homeassistant_custom_component.common import async_fire_time_changed
+from pytest_homeassistant_custom_component.common import async_fire_time_changed, async_mock_service
 
 from custom_components.ama_roma.const import DOMAIN
 
@@ -52,6 +54,14 @@ async def test_setup_calendar_and_change(hass, aioclient_mock):
         ("2026-11-07T06:30:00+01:00", "2026-11-07T08:30:00+01:00", "Plastica e metalli"),
     ]
 
+    # The README's "forward to phone" automation, exactly as written there.
+    readme = (HERE.parent / "README.md").read_text()
+    block = readme.split("alias: Avviso cambio calendario AMA")[1].split("```")[0]
+    assert await async_setup_component(
+        hass, "automation", {"automation": yaml.safe_load("alias: Avviso cambio calendario AMA" + block)}
+    )
+    phone = async_mock_service(hass, "notify", "notify")
+
     # A month later AMA returns a different schedule: calendar follows, user is notified.
     mock_api(aioclient_mock, "tuscolana_100.json")
     async_fire_time_changed(hass, dt_util.utcnow() + timedelta(days=31))
@@ -59,6 +69,7 @@ async def test_setup_calendar_and_change(hass, aioclient_mock):
     assert aioclient_mock.call_count == 1
     notes = hass.data["persistent_notification"]
     assert any("cambiato" in n["title"] for n in notes.values())
+    assert [c.data["title"] for c in phone] == ["AMA Roma: calendario cambiato"]
 
     # Street bins emptied from 22:00: the 2-hour event ends at midnight and is found from the evening.
     evening = await get_events(hass, entity_id, "2026-11-02 23:00:00", "2026-11-02 23:30:00")

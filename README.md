@@ -20,7 +20,7 @@ Scrivi la tua via e il civico: Home Assistant crea un calendario con tutti i gio
 | 📅 **Calendario automatico** | Un evento per ogni raccolta: *Carta*, *Organico*, *Plastica e metalli*, *Indifferenziato* |
 | ⏰ **All'orario giusto** | Porta a porta: l'evento inizia all'ora entro cui esporre (es. 20:00–22:00). Cassonetti in strada: all'inizio dello svuotamento. Ogni evento dura 2 ore |
 | 🔄 **Sempre aggiornato** | Ogni 30 giorni (e a ogni riavvio) ricontrolla il sito AMA |
-| 🔔 **Ti avvisa dei cambi** | Se AMA modifica giorni o orari, il calendario si aggiorna e ricevi una notifica |
+| 🔔 **Ti avvisa dei cambi** | Se AMA modifica giorni o orari, il calendario si aggiorna e compare una notifica in Home Assistant. Per riceverla anche sul telefono serve [un'automazione](#-notifica-sul-telefono-quando-ama-cambia-giorni-o-orari) |
 | 🔒 **Niente account** | Nessuna registrazione, nessuna chiave: usa gli stessi dati pubblici di [amaroma.it](https://www.amaroma.it/it/servizi/calendario-svuotamento-contenitori) |
 
 ## 📦 Installazione
@@ -74,6 +74,32 @@ actions:
 ```
 
 Preferisci un avviso poco prima della scadenza? Usa il trigger `calendar` con un `offset`, per esempio `"-01:00:00"` per un'ora prima.
+
+## 🔔 Notifica sul telefono quando AMA cambia giorni o orari
+
+Quando il controllo periodico trova un cambiamento, l'integrazione aggiorna il calendario e crea una **notifica dentro Home Assistant**: la vedi nel campanello 🔔 della barra laterale, con il titolo *"AMA Roma: calendario cambiato"*.
+
+> ⚠️ **Questa notifica non arriva da sola sul telefono.** Per riceverla lì devi creare questa automazione.
+
+In **Impostazioni → Automazioni e scene → Crea automazione → ⋮ → Modifica in YAML**, incolla:
+
+```yaml
+alias: Avviso cambio calendario AMA
+triggers:
+  - trigger: persistent_notification
+    update_type:
+      - added
+conditions:
+  - condition: template
+    value_template: "{{ trigger.notification.title.startswith('AMA Roma') }}"
+actions:
+  - action: notify.notify
+    data:
+      title: "{{ trigger.notification.title }}"
+      message: "{{ trigger.notification.message }}"
+```
+
+Sostituisci `notify.notify` con il servizio del tuo telefono, per esempio `notify.mobile_app_iphone_di_mario` (lo trovi in **Strumenti per sviluppatori → Azioni** cercando `notify.mobile_app`).
 
 ## ❓ Domande frequenti
 
