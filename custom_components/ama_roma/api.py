@@ -13,7 +13,6 @@ FRACTIONS = {
     "RIFIUTO RD CARTA": "Carta",
     "RIFIUTO RD MULTIMATERIALE": "Plastica e metalli",
     "RIFIUTO RD UMIDO": "Organico",
-    "RIFIUTO RD VETRO": "Vetro",
 }
 
 

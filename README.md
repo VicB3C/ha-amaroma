@@ -17,7 +17,7 @@ Scrivi la tua via e il civico: Home Assistant crea un calendario con tutti i gio
 
 | | |
 |---|---|
-| 📅 **Calendario automatico** | Un evento per ogni raccolta: *Carta*, *Organico*, *Plastica e metalli*, *Indifferenziato*, *Vetro* |
+| 📅 **Calendario automatico** | Un evento per ogni raccolta: *Carta*, *Organico*, *Plastica e metalli*, *Indifferenziato* |
 | ⏰ **All'orario giusto** | Porta a porta: l'evento inizia all'ora entro cui esporre (es. 20:00–22:00). Cassonetti in strada: all'inizio dello svuotamento. Ogni evento dura 2 ore, l'orario completo del ritiro è nella descrizione |
 | 🔄 **Sempre aggiornato** | Ogni 30 giorni (e a ogni riavvio) ricontrolla il sito AMA |
 | 🔔 **Ti avvisa dei cambi** | Se AMA modifica giorni o orari, il calendario si aggiorna e ricevi una notifica |
@@ -80,8 +80,6 @@ Preferisci un avviso poco prima della scadenza? Usa il trigger `calendar` con un
 **Non trova la mia via.** Scrivila come sul sito AMA, con il tipo di strada: `via`, `viale`, `piazza`…
 
 **"AMA non ha un calendario per questo civico".** Prova lo stesso indirizzo sul [sito AMA](https://www.amaroma.it/it/servizi/calendario-svuotamento-contenitori): se non lo trova neanche lì, l'indirizzo non è coperto.
-
-**Il vetro non compare.** In molte zone il vetro si porta sempre nelle campane verdi in strada, quindi non ha un giorno di raccolta.
 
 **Festività e scioperi?** Non sono inclusi: AMA pubblica solo il calendario settimanale.
 
