@@ -1,13 +1,13 @@
 # 🗑️ AMA Roma Raccolta Rifiuti
 
-[![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz)
+[![Marketplace](https://img.shields.io/badge/Marketplace-Custom-41BDF5.svg)](https://www.home-assistant.io/integrations/marketplace/)
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2024.11%2B-18BCF2.svg)](https://www.home-assistant.io)
 **Non dimenticare più di portare giù la spazzatura.**
 Scrivi la tua via e il civico: Home Assistant crea un calendario con tutti i giorni di raccolta AMA del tuo indirizzo a Roma, e lo tiene aggiornato da solo.
 
 <p align="center">
-  <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=VicB3C&repository=ha-amaroma&category=integration">
-    <img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Apri in HACS">
+  <a href="https://my.home-assistant.io/redirect/marketplace_repository/?owner=VicB3C&repository=ha-amaroma&category=integration">
+    <img src="https://my.home-assistant.io/badges/marketplace_repository.svg" alt="Apri nel Marketplace">
   </a>
 </p>
 
@@ -26,10 +26,12 @@ Scrivi la tua via e il civico: Home Assistant crea un calendario con tutti i gio
 
 ## 📦 Installazione
 
-1. Clicca il pulsante **Apri in HACS** qui sopra, oppure in HACS apri **⋮ → Repository personalizzati**, incolla `https://github.com/VicB3C/ha-amaroma` e scegli **Integrazione**.
-2. Scarica **AMA Roma Raccolta Rifiuti** e **riavvia Home Assistant**.
-3. Vai in **Impostazioni → Dispositivi e servizi → Aggiungi integrazione** e cerca **AMA Roma**.
+1. Clicca il pulsante qui sopra, oppure vai in **Impostazioni → Marketplace → Aggiungi da link** (*Add from link*) e incolla `https://github.com/VicB3C/ha-amaroma`. Se richiesto, collega il tuo account GitHub e scegli **Integrazione** come tipo.
+2. Apri **AMA Roma Raccolta Rifiuti** e premi **Installa** (*Install*): si apre subito la configurazione, senza riavvio.
+3. Se la configurazione non si apre, vai in **Impostazioni → Dispositivi e servizi → Aggiungi integrazione** e cerca **AMA Roma**.
 4. Scrivi la **via** (es. `via nomentana`) e il **numero civico**. Fatto!
+
+> **Home Assistant 2026.10 o precedente?** Il Marketplace non c'è ancora: il pulsante apre HACS. Scarica l'integrazione da lì, riavvia Home Assistant e prosegui dal punto 3.
 
 > Puoi aggiungere l'integrazione più volte per seguire più indirizzi, per esempio casa e ufficio.
 
